@@ -22,7 +22,6 @@
 # License along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 ##############################################################################
-
 from spack import *
 
 
@@ -34,11 +33,12 @@ class Adios(AutotoolsPackage):
     """
 
     homepage = "http://www.olcf.ornl.gov/center-projects/adios/"
-    url      = "https://github.com/ornladios/ADIOS/archive/v1.11.1.tar.gz"
+    url = "https://github.com/ornladios/ADIOS/archive/v1.11.1.tar.gz"
 
     version('develop', git='https://github.com/ornladios/ADIOS.git',
             branch='master')
     version('1.11.1', '5639bfc235e50bf17ba9dafb14ea4185')
+    version('1.11.0', '5eead5b2ccf962f5e6d5f254d29d5238')
     version('1.10.0', 'eff450a4c0130479417cfd63186957f3')
     version('1.9.0', '310ff02388bbaa2b1c1710ee970b5678')
 
@@ -58,6 +58,8 @@ class Adios(AutotoolsPackage):
     variant('zfp', default=False, description='Enable ZFP transform support')
     # transports and serial file converters
     variant('hdf5', default=False, description='Enable parallel HDF5 transport and serial bp2h5 converter')
+    variant('flexpath', default=False, description='Enable flexpath transport')
+    variant('staging', default=False, description='Enable dataspaces and flexpath staging transports')
 
     # Lots of setting up here for this package
     # module swap PrgEnv-intel PrgEnv-$COMP
@@ -78,6 +80,8 @@ class Adios(AutotoolsPackage):
     depends_on('zfp@:0.5.0', when='+zfp')
     # optional transports & file converters
     depends_on('hdf5@1.8:+mpi', when='+hdf5')
+    depends_on('libevpath', when='+flexpath')
+    # depends_on('libevpath', when='+staging')
 
     build_directory = 'spack-build'
 
@@ -136,5 +140,12 @@ class Adios(AutotoolsPackage):
             extra_args.append('--with-zfp=%s' % spec['zfp'].prefix)
         if '+hdf5' in spec:
             extra_args.append('--with-phdf5=%s' % spec['hdf5'].prefix)
+        if '+flexpath' in spec:
+            extra_args.append('--with-flexpath=%s' % spec['libevpath'].prefix)
+            extra_args.append('--with-ffs=%s' % spec['libffs'].prefix)
+            extra_args.append('--with-dill=%s' % spec['gtkorvo-dill'].prefix)
+            extra_args.append('--with-atl=%s' % spec['gtkorvo-atl'].prefix)
+            extra_args.append('--with-cercs_env=%s'
+                              % spec['gtkorvo-cercs-env'].prefix)
 
         return extra_args
