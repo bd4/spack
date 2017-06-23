@@ -47,7 +47,7 @@ class Adios(AutotoolsPackage):
     variant('fortran', default=True,
             description='Enable Fortran bindings support')
 
-    variant('mpi', default=False, description='Explicitly specify MPI dir')
+    variant('mpi', default=True, description='Enable MPI support')
     variant('no_mpi', default=False, description='Disable MPI support')
     variant('infiniband', default=False, description='Enable infiniband support')
     variant('mxml', default=False, description='Build with external mxml')
