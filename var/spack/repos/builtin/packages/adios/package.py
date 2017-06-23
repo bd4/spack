@@ -61,6 +61,7 @@ class Adios(AutotoolsPackage):
     # transports and serial file converters
     variant('hdf5', default=False, description='Enable parallel HDF5 transport and serial bp2h5 converter')
     variant('flexpath', default=False, description='Enable flexpath transport')
+    variant('dataspaces', default=False, description='Enable dataspaces transport')
     variant('staging', default=False, description='Enable dataspaces and flexpath staging transports')
 
     # Lots of setting up here for this package
@@ -84,6 +85,7 @@ class Adios(AutotoolsPackage):
     depends_on('hdf5@1.8:+mpi', when='+hdf5')
     depends_on('libevpath', when='+flexpath')
     depends_on('libevpath', when='+staging')
+    depends_on('dataspaces', when='+staging')
 
     build_directory = 'spack-build'
 
@@ -144,12 +146,14 @@ class Adios(AutotoolsPackage):
         #    extra_args.append('--with-zfp=%s' % spec['zfp'].prefix)
         if '+hdf5' in spec:
             extra_args.append('--with-phdf5=%s' % spec['hdf5'].prefix)
-        if '+flexpath' in spec:
+        if ('+flexpath' in spec) or ('staging' in spec):
             extra_args.append('--with-flexpath=%s' % spec['libevpath'].prefix)
             extra_args.append('--with-ffs=%s' % spec['libffs'].prefix)
             extra_args.append('--with-dill=%s' % spec['gtkorvo-dill'].prefix)
             extra_args.append('--with-atl=%s' % spec['gtkorvo-atl'].prefix)
             extra_args.append('--with-cercs_env=%s'
                               % spec['gtkorvo-cercs-env'].prefix)
+        if ('+dataspaces' in spec) or ('staging' in spec):
+            extra_args.append('--with-dataspaces=%s' % spec['dataspaces'].prefix)
 
         return extra_args
