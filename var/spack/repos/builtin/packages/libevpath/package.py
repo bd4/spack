@@ -32,15 +32,15 @@ class Libevpath(CMakePackage):
     in the overlay. EVPath is designed for high performance systems.
     """
 
-    homepage = "http://www.cc.gatech.edu/systems/projects/EVPath"
+    homepage = "https://github.com/GTkorvo/evpath"
     url = "https://github.com/GTkorvo/evpath/archive/v4.1.1.tar.gz"
 
-    version('head', git='https://github.com/GTkorvo/evpath.git',
+    version('develop', git='https://github.com/GTkorvo/evpath.git',
             branch='master')
+    version('4.1.2', '1a187f55431c991ae7040e3ff041d75c')
     version('4.1.1', '65a8db820f396ff2926e3d31908d123d')
 
     depends_on('libffs')
-    depends_on('gtkorvo-enet')
 
     def cmake_args(self):
         args = ["-DENABLE_TESTING=0"]
