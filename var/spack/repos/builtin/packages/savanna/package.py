@@ -41,4 +41,4 @@ class Savanna(Package):
 
     def install(self, spec, prefix):
         make()
-        make('install')
+        install('README.md', prefix)
