@@ -146,14 +146,14 @@ class Adios(AutotoolsPackage):
         #    extra_args.append('--with-zfp=%s' % spec['zfp'].prefix)
         if '+hdf5' in spec:
             extra_args.append('--with-phdf5=%s' % spec['hdf5'].prefix)
-        if ('+flexpath' in spec) or ('staging' in spec):
+        if ('+flexpath' in spec) or ('+staging' in spec):
             extra_args.append('--with-flexpath=%s' % spec['libevpath'].prefix)
             extra_args.append('--with-ffs=%s' % spec['libffs'].prefix)
             extra_args.append('--with-dill=%s' % spec['gtkorvo-dill'].prefix)
             extra_args.append('--with-atl=%s' % spec['gtkorvo-atl'].prefix)
             extra_args.append('--with-cercs_env=%s'
                               % spec['gtkorvo-cercs-env'].prefix)
-        if ('+dataspaces' in spec) or ('staging' in spec):
+        if ('+dataspaces' in spec) or ('+staging' in spec):
             extra_args.append('--with-dataspaces=%s' % spec['dataspaces'].prefix)
 
         return extra_args
