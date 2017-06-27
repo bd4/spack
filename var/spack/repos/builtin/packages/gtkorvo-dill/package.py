@@ -39,5 +39,6 @@ class GtkorvoDill(CMakePackage):
     version('2.1', '14c835e79b66c9acd2beee01d56e6200')
 
     def cmake_args(self):
-        args = ["-DENABLE_TESTING=0"]
+        args = ["-DENABLE_TESTING=0", "-DBUILD_SHARED_STATIC=STATIC"]
+        #args = ["-DENABLE_TESTING=0"]
         return args
