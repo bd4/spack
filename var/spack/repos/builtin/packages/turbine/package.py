@@ -7,7 +7,7 @@
 # LLNL-CODE-647188
 #
 # For details, see https://github.com/llnl/spack
-# Please also see the LICENSE file for our notice and the LGPL.
+# Please also see the NOTICE and LICENSE files for our notice and the LGPL.
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU Lesser General Public License (as
@@ -30,13 +30,13 @@ class Turbine(AutotoolsPackage):
     """Turbine: The Swift/T runtime"""
 
     homepage = 'http://swift-lang.org/Swift-T'
-    url      = 'http://swift-lang.github.io/swift-t-downloads/turbine-1.0.0.tar.gz'
+    url      = 'http://swift-lang.github.io/swift-t-downloads/1.3/spack/turbine-1.1.0.tar.gz'
 
-    version('1.0.0', '7ed56d65d6db0bfe15a439d818b4259e')
+    version('1.1.0', '2575ce7ea7142ea7df139578b9e0ca94')
 
     depends_on('adlbx')
     depends_on('tcl')
-    depends_on('zsh', type='run')
+    depends_on('zsh')
 
     def configure_args(self):
         args = ['--with-c-utils=' + self.spec['exmcutils'].prefix,

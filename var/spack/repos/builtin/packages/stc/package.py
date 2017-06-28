@@ -7,7 +7,7 @@
 # LLNL-CODE-647188
 #
 # For details, see https://github.com/llnl/spack
-# Please also see the LICENSE file for our notice and the LGPL.
+# Please also see the NOTICE and LICENSE files for our notice and the LGPL.
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU Lesser General Public License (as
@@ -30,9 +30,9 @@ class Stc(AutotoolsPackage):
     """STC: The Swift-Turbine Compiler"""
 
     homepage = 'http://swift-lang.org/Swift-T'
-    url      = 'http://swift-lang.github.io/swift-t-downloads/stc-0.7.3.tar.gz'
+    url      = 'http://swift-lang.github.io/swift-t-downloads/1.3/spack/stc-0.7.4.tar.gz'
 
-    version('0.7.3', '6bf769f406f6c33d1c134521373718d3')
+    version('0.7.4', '88424cb7acdb0b712f76717aae40090f')
 
     depends_on('jdk')
     depends_on('ant')
