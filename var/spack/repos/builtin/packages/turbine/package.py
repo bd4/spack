@@ -50,5 +50,5 @@ class Turbine(AutotoolsPackage):
                 '--with-mpi='     + self.spec['mpi'].prefix]
         if '+python' in self.spec:
             args.append('--with-python-exe={0}'.format(
-                                            self.spec['python'].command.path))
+                        self.spec['python'].command.path))
         return args
